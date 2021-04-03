@@ -16,10 +16,8 @@ class CreateRolUserTable extends Migration
     {
         Schema::create('rol_user', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('rol_id')->unsigned();
-            $table->foreign('rol_id')->references('id')->on('rols');
-            $table->bigInteger('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreignId('rol_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -32,9 +30,6 @@ class CreateRolUserTable extends Migration
      */
     public function down()
     {
-        Schema::table('rol_user', function (Blueprint $table) {
-            $table->dropSoftDeletes();
-        });
         Schema::dropIfExists('rol_user');
 
     }

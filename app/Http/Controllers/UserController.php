@@ -25,7 +25,6 @@ class UserController extends Controller
     {
         $user = auth()->user();
         // return view('users.index')->with('users', $users);
-        return view('users.index')->with('user', $user);
     }
 
     /**
@@ -74,7 +73,9 @@ class UserController extends Controller
         ]);
 
         // Rol usuario general
-        $rol = 2;
+        dd($usuario);
+        $rol = Rol::where('nombre', 'Estudiante')->first()->pluck('id');
+        dd($rol);
         $usuario->roles()->attach($rol);
 
         // Redireccionar a la página principal con mensaje de éxito

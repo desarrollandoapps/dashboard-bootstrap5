@@ -8,6 +8,6 @@
         </div>
     @endif
 
-    Ha iniciado sesión
+    {{ Auth::user()->name }}: bienvenido de nuevo.  {{ Auth::user()->hasRol("Estudiante") }}
 </div>
 @endsection

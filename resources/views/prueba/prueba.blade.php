@@ -3,5 +3,5 @@
 @section('titulo', 'Prueba')
 
 @section('content')
-    <p>This is my body content.</p>
+    <p>Esta es una página de prueba</p>
 @endsection

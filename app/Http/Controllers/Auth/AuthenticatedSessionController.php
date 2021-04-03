@@ -7,6 +7,9 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use App\Models\User;
+use App\Models\Rol;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -32,7 +35,20 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        // Redirigir según el rol
+        $user = User::where('email', $request->email)->first();
+        $rol = DB::table('rol_user')->where('user_id', $user->id)->first();
+        
+        switch ($rol->rol_id)
+        {
+            case 1: //Administrador
+                return redirect()->intended('dashboard');
+                break;
+            case 2: //Estudiante
+                return redirect()->intended('prueba');
+                break;
+        }
+        // return redirect()->intended(RouteServiceProvider::HOME);
     }
 
     /**

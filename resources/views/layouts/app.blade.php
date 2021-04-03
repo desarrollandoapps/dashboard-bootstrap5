@@ -49,7 +49,6 @@
                         </div>
                     </div>
                     @yield('content')
-                    Ww
                 </main>
             </div>
         </div>
